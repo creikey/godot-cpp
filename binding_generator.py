@@ -2,6 +2,7 @@
 
 import json
 import sys
+import os
 
 # comment.
 
@@ -841,4 +842,7 @@ def escape_cpp(name):
     return name
 
 if __name__ == "__main__":
+    if sys.argv[2] == 'false':
+        if os.path.exists("src/gen/meson.build"):
+            quit()
     generate_bindings(sys.argv[1])

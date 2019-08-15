@@ -1,7 +1,7 @@
 project('godot-cpp', 'cpp')
 
 gen_script = find_program('binding_generator.py', native : true)
-gen_return = run_command(gen_script, get_option('api_json_path'))
+gen_return = run_command(gen_script, get_option('api_json_path'), '@0@'.format(get_option('force_regen_bindings')))
 
 if gen_return.returncode() != 0
   message('failed to generate bindings')
