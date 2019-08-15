@@ -1,6 +1,7 @@
 #!python
 
 import json
+import sys
 
 # comment.
 
@@ -10,11 +11,13 @@ def generate_bindings(path):
     
     global classes
     classes = json.load(open(path))
+
+    generated_sources = []
     
     icalls = set()
     
     for c in classes:
-        # print c['name']
+        print(c['name'])
         used_classes = get_used_classes(c)
         
         header = generate_class_header(used_classes, c)
@@ -24,7 +27,9 @@ def generate_bindings(path):
         header_file = open("include/gen/" + strip_name(c["name"]) + ".hpp", "w+")
         header_file.write(header)
         
-        source_file = open("src/gen/" + strip_name(c["name"]) + ".cpp", "w+")
+        source_file_name = strip_name(c["name"]) + ".cpp"
+        generated_sources.append("'" + str(source_file_name) + "'")
+        source_file = open("src/gen/" + source_file_name, "w+")
         source_file.write(impl)
     
     
@@ -36,6 +41,9 @@ def generate_bindings(path):
 
     register_types_file = open("src/gen/__register_types.cpp", "w+")
     register_types_file.write(generate_type_registry(classes))
+    
+    meson_build_file = open("src/gen/meson.build", "w")
+    meson_build_file.write("sources += files(" + ",".join(generated_sources) + ")")
 
 
 def is_reference_type(t):
@@ -830,3 +838,6 @@ def escape_cpp(name):
     if name in escapes:
         return escapes[name]
     return name
+
+if __name__ == "__main__":
+    generate_bindings(sys.argv[1])

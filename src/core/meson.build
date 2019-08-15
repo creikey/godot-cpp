@@ -1,0 +1,1 @@
+sources += files('AABB.cpp','Array.cpp','Basis.cpp','Color.cpp','Dictionary.cpp','GodotGlobal.cpp','NodePath.cpp','Plane.cpp','PoolArrays.cpp','Quat.cpp','Rect2.cpp','RID.cpp','String.cpp','TagDB.cpp','Transform2D.cpp','Transform.cpp','Variant.cpp','Vector2.cpp','Vector3.cpp')

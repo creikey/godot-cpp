@@ -1,0 +1,1 @@
+option('api_json_path', type : 'string', value : 'godot_headers/api.json', description : 'Relative path from project root of api json file')
