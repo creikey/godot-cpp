@@ -17,7 +17,6 @@ def generate_bindings(path):
     icalls = set()
     
     for c in classes:
-        print(c['name'])
         used_classes = get_used_classes(c)
         
         header = generate_class_header(used_classes, c)
