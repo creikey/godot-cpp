@@ -37,9 +37,11 @@ def generate_bindings(path):
     
     icall_source_file = open("src/gen/__icalls.cpp", "w+")
     icall_source_file.write(generate_icall_implementation(icalls))
+    generated_sources.append("'__icalls.cpp'")
 
     register_types_file = open("src/gen/__register_types.cpp", "w+")
     register_types_file.write(generate_type_registry(classes))
+    generated_sources.append("'__register_types.cpp'")
     
     meson_build_file = open("src/gen/meson.build", "w")
     meson_build_file.write("sources += files(" + ",".join(generated_sources) + ")")
